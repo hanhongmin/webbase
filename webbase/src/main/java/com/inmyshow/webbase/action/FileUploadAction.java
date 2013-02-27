@@ -13,22 +13,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 @Controller
-public class FileUploadAction extends MultiActionController{
-	private static final Logger LOGGER = LoggerFactory.getLogger(FileUploadAction.class);
+public class FileUploadAction extends MultiActionController {
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(FileUploadAction.class);
+
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String handleFormUpload(@RequestParam("filename") String filename,
 			@RequestParam("filedata") Part file) {
 		long filesize = file.getSize();
-		LOGGER.error("*************************************文件大小为："+filesize);
-		if(filesize>1024*1024*2){//单个文件2M
-			return null;
-		}else{
-			try {
-				file.write("a.txt");//保存文件
-			} catch (IOException e) {
-				LOGGER.error("保存文件发生错误", e);
-			}
-			return "uploadsuccess";
+		LOGGER.debug("上传的文件大小为：" + filesize);
+		LOGGER.debug("filename:"+filename);
+		try {
+			file.write("a.txt");// 保存文件
+		} catch (IOException e) {
+			LOGGER.error("保存文件发生错误", e);
 		}
+		return "testviews/uploadsuccess";
+
 	}
 }
