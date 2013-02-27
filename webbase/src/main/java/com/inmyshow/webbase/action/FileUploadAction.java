@@ -10,9 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 @Controller
-public class FileUploadAction {
+public class FileUploadAction extends MultiActionController{
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileUploadAction.class);
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String handleFormUpload(@RequestParam("filename") String filename,
@@ -27,7 +28,7 @@ public class FileUploadAction {
 			} catch (IOException e) {
 				LOGGER.error("保存文件发生错误", e);
 			}
-			return "redirect:uploadSuccess";
+			return "uploadsuccess";
 		}
 	}
 }

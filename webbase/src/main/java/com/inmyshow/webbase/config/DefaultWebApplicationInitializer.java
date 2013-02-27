@@ -1,5 +1,6 @@
 package com.inmyshow.webbase.config;
 
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -13,6 +14,11 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 public class DefaultWebApplicationInitializer implements WebApplicationInitializer {
 	private final static Logger LOGGER = LoggerFactory.getLogger(DefaultWebApplicationInitializer.class);
+	
+	private static final long MAX_FILE_UPLOAD_SIZE = 1024 * 1024 * 5;
+	private static final int FILE_SIZE_THRESHOLD = 1024 * 1024;
+	private static final long MAX_REQUEST_SIZE = -1L;
+	
 	@Override
 	public void onStartup(ServletContext appContext) throws ServletException {
 		LOGGER.info("********************onStartup");
@@ -22,11 +28,14 @@ public class DefaultWebApplicationInitializer implements WebApplicationInitializ
 
 		AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
 		dispatcherContext.register(DispatcherConfig.class);
- 
+		
 		ServletRegistration.Dynamic dispatcher = appContext.addServlet(
 				"dispatcher", new DispatcherServlet(dispatcherContext));
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
+		dispatcher.setMultipartConfig(
+				new MultipartConfigElement(null,
+				MAX_FILE_UPLOAD_SIZE, MAX_REQUEST_SIZE, FILE_SIZE_THRESHOLD));
 
 	}
 }

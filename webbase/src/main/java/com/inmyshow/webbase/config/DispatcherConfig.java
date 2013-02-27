@@ -21,7 +21,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@MultipartConfig(fileSizeThreshold=1024*1024*2,location="./")
 @ComponentScan(basePackages = { "com.inmyshow.*.action"})
 public class DispatcherConfig extends WebMvcConfigurerAdapter {
 	private final static Logger LOGGER = LoggerFactory.getLogger(DispatcherConfig.class);
@@ -44,7 +43,7 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
 	    resolver.setSuffix(".jsp");
 	    return resolver;
 	}
-	@Bean
+	@Bean(name="multipartResolver")
 	public StandardServletMultipartResolver configureStandardServletMultipartResolver() {
 		StandardServletMultipartResolver resolver = new StandardServletMultipartResolver();
 	    return resolver;
