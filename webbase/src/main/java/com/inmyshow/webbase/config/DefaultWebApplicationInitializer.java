@@ -1,8 +1,5 @@
 package com.inmyshow.webbase.config;
 
-import java.util.EnumSet;
-
-import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
@@ -38,7 +35,7 @@ public class DefaultWebApplicationInitializer implements
 		charEncodingfilterReg.setInitParameter("encoding", "UTF-8");
 		charEncodingfilterReg.setInitParameter("forceEncoding", "true");
 		charEncodingfilterReg.addMappingForUrlPatterns(null, false, "/*");
-		// appContext.addFilter("sessionFilter",SessionFilter.class);//µÇÂ¼¹ıÂËÆ÷
+		// appContext.addFilter("sessionFilter",SessionFilter.class);//ç™»å½•è¿‡æ»¤å™¨
 		
 		AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
 		dispatcherContext.register(DispatcherConfig.class);
@@ -48,7 +45,7 @@ public class DefaultWebApplicationInitializer implements
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
 		dispatcher.setMultipartConfig(new MultipartConfigElement(null,
-				MAX_FILE_UPLOAD_SIZE, MAX_REQUEST_SIZE, FILE_SIZE_THRESHOLD));// ÉèÖÃÒÔ±ã´¦ÀímultipartRequest¡£ÎÄ¼şÉÏ´«
+				MAX_FILE_UPLOAD_SIZE, MAX_REQUEST_SIZE, FILE_SIZE_THRESHOLD));// è®¾ç½®ä»¥ä¾¿å¤„ç†multipartRequestã€‚æ–‡ä»¶ä¸Šä¼ 
 
 	}
 }

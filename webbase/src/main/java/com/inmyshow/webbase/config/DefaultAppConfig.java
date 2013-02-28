@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ComponentScan(basePackages = { 
 		"com.inmyshow.*.dao.impl", "com.inmyshow.*.entity" })
-// ¿ÉÒÔÊ¹ÓÃ*ºÅ
+// å¯ä»¥ä½¿ç”¨*å·
 @Import(DataSourceConfig.class)
 @EnableTransactionManagement
 public class DefaultAppConfig {

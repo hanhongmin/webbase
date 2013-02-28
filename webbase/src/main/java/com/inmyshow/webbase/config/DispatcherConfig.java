@@ -52,8 +52,8 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		LOGGER.info("******************addResourceHandlers");
-		registry.addResourceHandler("/resources/**").addResourceLocations(
-				"/public-resources/");
+		registry.addResourceHandler("/static/**").addResourceLocations(
+				"/js/");
 	}
 
 }

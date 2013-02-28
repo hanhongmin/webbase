@@ -1,4 +1,4 @@
-/**本包提供访问数据层的DAO实现
+/**鏈寘鎻愪緵璁块棶鏁版嵁灞傜殑DAO瀹炵幇
  * @author HanHongmin
  *
  */

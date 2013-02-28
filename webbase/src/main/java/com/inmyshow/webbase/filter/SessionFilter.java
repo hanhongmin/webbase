@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
- * µÇÂ¼¹ıÂË
+ * ç™»å½•è¿‡æ»¤
  * 
  */
 public class SessionFilter extends OncePerRequestFilter {
@@ -29,52 +29,52 @@ public class SessionFilter extends OncePerRequestFilter {
 			HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 
-		// ²»¹ıÂËµÄuri
+		// ä¸è¿‡æ»¤çš„uri
 		String[] notFilter = new String[] { "login.html", "index.html", "index.jsp", "login.jsp" };
 
-		// ÇëÇóµÄuri
+		// è¯·æ±‚çš„uri
 		String uri = request.getRequestURI();
 
-		// uriÖĞ°üº¬backgroundÊ±²Å½øĞĞ¹ıÂË
+		// uriä¸­åŒ…å«backgroundæ—¶æ‰è¿›è¡Œè¿‡æ»¤
 		// if (uri.indexOf("background") != -1) {
-		// ÊÇ·ñ¹ıÂË
+		// æ˜¯å¦è¿‡æ»¤
 		boolean doFilter = true;
 		for (String s : notFilter) {
 			if (uri.indexOf(s) != -1) {
-				// Èç¹ûuriÖĞ°üº¬²»¹ıÂËµÄuri£¬Ôò²»½øĞĞ¹ıÂË
+				// å¦‚æœuriä¸­åŒ…å«ä¸è¿‡æ»¤çš„uriï¼Œåˆ™ä¸è¿›è¡Œè¿‡æ»¤
 				doFilter = false;
 				break;
 			}
 		}
 		if (doFilter) {
-			// Ö´ĞĞ¹ıÂË
-			// ´ÓsessionÖĞ»ñÈ¡µÇÂ¼ÕßÊµÌå
+			// æ‰§è¡Œè¿‡æ»¤
+			// ä»sessionä¸­è·å–ç™»å½•è€…å®ä½“
 			Object obj = request.getSession().getAttribute("userId");
 			if (null == obj) {
-				// Èç¹ûsessionÖĞ²»´æÔÚµÇÂ¼ÕßÊµÌå£¬Ôòµ¯³ö¿òÌáÊ¾ÖØĞÂµÇÂ¼
-				// ÉèÖÃrequestºÍresponseµÄ×Ö·û¼¯£¬·ÀÖ¹ÂÒÂë
+				// å¦‚æœsessionä¸­ä¸å­˜åœ¨ç™»å½•è€…å®ä½“ï¼Œåˆ™å¼¹å‡ºæ¡†æç¤ºé‡æ–°ç™»å½•
+				// è®¾ç½®requestå’Œresponseçš„å­—ç¬¦é›†ï¼Œé˜²æ­¢ä¹±ç 
 				request.setCharacterEncoding("UTF-8");
 				response.setCharacterEncoding("UTF-8");
 				PrintWriter out = response.getWriter();
 				String loginPage = "login.jsp";
 				StringBuilder builder = new StringBuilder();
 				builder.append("<script type=\"text/javascript\">");
-				builder.append("alert('ÍøÒ³¹ıÆÚ£¬ÇëÖØĞÂµÇÂ¼£¡');");
+				builder.append("alert('ç½‘é¡µè¿‡æœŸï¼Œè¯·é‡æ–°ç™»å½•ï¼');");
 				builder.append("window.top.location.href='");
 				builder.append(loginPage);
 				builder.append("';");
 				builder.append("</script>");
 				out.print(builder.toString());
 			} else {
-				// Èç¹ûsessionÖĞ´æÔÚµÇÂ¼ÕßÊµÌå£¬Ôò¼ÌĞø
+				// å¦‚æœsessionä¸­å­˜åœ¨ç™»å½•è€…å®ä½“ï¼Œåˆ™ç»§ç»­
 				filterChain.doFilter(request, response);
 			}
 		} else {
-			// Èç¹û²»Ö´ĞĞ¹ıÂË£¬Ôò¼ÌĞø
+			// å¦‚æœä¸æ‰§è¡Œè¿‡æ»¤ï¼Œåˆ™ç»§ç»­
 			filterChain.doFilter(request, response);
 		}
 		// } else {
-		// Èç¹ûuriÖĞ²»°üº¬background£¬Ôò¼ÌĞø
+		// å¦‚æœuriä¸­ä¸åŒ…å«backgroundï¼Œåˆ™ç»§ç»­
 		// filterChain.doFilter(request, response);
 		// }
 	}

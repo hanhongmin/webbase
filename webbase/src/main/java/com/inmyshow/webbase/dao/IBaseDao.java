@@ -6,7 +6,7 @@ public interface IBaseDao<T extends Object, ID extends Serializable> {
 
 
 	/**
-	 * 获得实体
+	 * 鑾峰緱瀹炰綋
 	 * 
 	 * @param clazz
 	 * @param id
@@ -15,14 +15,14 @@ public interface IBaseDao<T extends Object, ID extends Serializable> {
 	public T get(Class<T> clazz, ID id);
 
 	/**
-	 * 保存或更新实体，取决于id
+	 * 淇濆瓨鎴栨洿鏂板疄浣擄紝鍙栧喅浜巌d
 	 * 
 	 * @param object
 	 */
 	public void saveOrUpdate(T object);
 
 	/**
-	 * 删除实体
+	 * 鍒犻櫎瀹炰綋
 	 * 
 	 * @param object
 	 */
