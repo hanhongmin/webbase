@@ -11,7 +11,6 @@ public class ItemInfo extends BaseEntity{
 
 	private static final long serialVersionUID = 1L;
 
-
 	/** 物品名字 */
 	private String itemName;
 
@@ -38,6 +37,10 @@ public class ItemInfo extends BaseEntity{
 	private Date lastOptTime;
 	/**上传的原文件名*/
 	private String uploadFileName;
+	/**上传时间*/
+	private Date uploadTime;
+	/**上传人*/
+	private String uploadPeople;
 	/**新文件名*/
 	private String newFileName;
 	/**新文件路径*/
@@ -191,6 +194,26 @@ public class ItemInfo extends BaseEntity{
 
 	public void setLoadType(String loadType) {
 		this.loadType = loadType;
+	}
+
+	@Column(name = "upload_time")
+	public Date getUploadTime() {
+		return uploadTime;
+	}
+
+
+	public void setUploadTime(Date uploadTime) {
+		this.uploadTime = uploadTime;
+	}
+
+	@Column(name = "upload_people")
+	public String getUploadPeople() {
+		return uploadPeople;
+	}
+
+
+	public void setUploadPeople(String uploadPeople) {
+		this.uploadPeople = uploadPeople;
 	}
 
 

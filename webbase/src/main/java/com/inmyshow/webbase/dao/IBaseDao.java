@@ -1,6 +1,9 @@
 package com.inmyshow.webbase.dao;
 
 import java.io.Serializable;
+import java.util.List;
+
+import org.hibernate.criterion.DetachedCriteria;
 
 public interface IBaseDao<T extends Object, ID extends Serializable> {
 
@@ -27,5 +30,10 @@ public interface IBaseDao<T extends Object, ID extends Serializable> {
 	 * @param object
 	 */
 	public void delete(T object);
+	public List<T> findByExample(Class<T> clazz,T exampleEntity);
+	public List<T> findByExample(Class<T> clazz,T exampleEntity,int firstResult,int maxResults);
+	public List<T> findByCriteria(DetachedCriteria dc);
+	public Integer getRowCount(DetachedCriteria dc);
+	public List<T> findByCriteria(DetachedCriteria dc,int firstResult,int maxResults);
 
 }

@@ -1,10 +1,15 @@
 package com.inmyshow.webbase.dao;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Projections;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -30,6 +35,46 @@ public class BaseDAOImpl<T extends Object, ID extends Serializable> implements I
 	@Transactional("txManager")
 	public void delete(T object) {
 		sessionFactory.getCurrentSession().delete(object);
+	}
+
+	@Override
+	public List<T> findByCriteria(DetachedCriteria dc) {
+		Criteria c = dc.getExecutableCriteria(sessionFactory.getCurrentSession());
+		return c.list();
+	}
+
+	@Override
+	public Integer getRowCount(DetachedCriteria dc) {
+		Criteria c = dc.getExecutableCriteria(sessionFactory.getCurrentSession());
+		Object o = c.setProjection(Projections.rowCount()).uniqueResult();
+		Integer totalCount=((Integer)o).intValue();
+		c.setProjection(null);
+		return totalCount;
+	}
+
+	@Override
+	public List<T> findByCriteria(DetachedCriteria dc,int firstResult,int maxResults) {
+		Criteria c = dc.getExecutableCriteria(sessionFactory.getCurrentSession());
+		c.setFirstResult(firstResult);
+		c.setMaxResults(maxResults);
+		return c.list();
+	}
+
+	@Override
+	public List<T> findByExample(Class<T> clazz,T exampleEntity) {
+		Criteria c = sessionFactory.getCurrentSession().createCriteria(clazz);
+		c.add(Example.create(exampleEntity));
+		return c.list();
+	}
+
+	@Override
+	public List<T> findByExample(Class<T> clazz,T exampleEntity, int firstResult,
+			int maxResults) {
+		Criteria c = sessionFactory.getCurrentSession().createCriteria(clazz);
+		c.add(Example.create(exampleEntity));
+		c.setFirstResult(firstResult);
+		c.setMaxResults(maxResults);
+		return c.list();
 	}
 
 }
