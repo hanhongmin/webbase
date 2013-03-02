@@ -32,14 +32,8 @@ public class FileUploadAction{
 	private IItemInfoDao itemDao;
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String handleFormUpload(String name,String info,Integer type,
-			@RequestParam("filedata") Part file) throws IOException{
-		String itemName = new String(name.getBytes("ISO-8859-1"),"UTF-8");
-		String itemInfo = new String(info.getBytes("ISO-8859-1"),"UTF-8");
+	public String handleFormUpload(@RequestParam("filedata") Part file) throws IOException{
 		ItemInfo item = new ItemInfo();
-		item.setItemComment(itemInfo);
-		item.setItemName(itemName);
-		item.setItemType(type);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 		String month = sdf.format(new Date());
 		long mill = System.currentTimeMillis();
@@ -62,8 +56,7 @@ public class FileUploadAction{
 		LOGGER.debug(item.toString());
 		itemDao.saveOrUpdate(item);
 		
-		return "redirect:upload.jsp";
-
+		return "testviews/uploadsuccess";
 	}
 	
 	private String parseFileName(String header) {

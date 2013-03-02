@@ -30,10 +30,10 @@ public interface IBaseDao<T extends Object, ID extends Serializable> {
 	 * @param object
 	 */
 	public void delete(T object);
-	public List<T> findByExample(Class<T> clazz,T exampleEntity);
-	public List<T> findByExample(Class<T> clazz,T exampleEntity,int firstResult,int maxResults);
+	public List<T> findByExample(T exampleEntity);
+	public List<T> findByExample(T exampleEntity,int firstResult,int maxResults);
 	public List<T> findByCriteria(DetachedCriteria dc);
-	public Integer getRowCount(DetachedCriteria dc);
+	public Long getRowCount(DetachedCriteria dc);
 	public List<T> findByCriteria(DetachedCriteria dc,int firstResult,int maxResults);
 
 }

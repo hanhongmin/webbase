@@ -38,16 +38,17 @@ public class BaseDAOImpl<T extends Object, ID extends Serializable> implements I
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public List<T> findByCriteria(DetachedCriteria dc) {
 		Criteria c = dc.getExecutableCriteria(sessionFactory.getCurrentSession());
 		return c.list();
 	}
 
 	@Override
-	public Integer getRowCount(DetachedCriteria dc) {
+	public Long getRowCount(DetachedCriteria dc) {
 		Criteria c = dc.getExecutableCriteria(sessionFactory.getCurrentSession());
 		Object o = c.setProjection(Projections.rowCount()).uniqueResult();
-		Integer totalCount=((Integer)o).intValue();
+		Long totalCount=((Long)o).longValue();
 		c.setProjection(null);
 		return totalCount;
 	}
@@ -61,16 +62,16 @@ public class BaseDAOImpl<T extends Object, ID extends Serializable> implements I
 	}
 
 	@Override
-	public List<T> findByExample(Class<T> clazz,T exampleEntity) {
-		Criteria c = sessionFactory.getCurrentSession().createCriteria(clazz);
+	public List<T> findByExample(T exampleEntity) {
+		Criteria c = sessionFactory.getCurrentSession().createCriteria(exampleEntity.getClass());
 		c.add(Example.create(exampleEntity));
 		return c.list();
 	}
 
 	@Override
-	public List<T> findByExample(Class<T> clazz,T exampleEntity, int firstResult,
+	public List<T> findByExample(T exampleEntity, int firstResult,
 			int maxResults) {
-		Criteria c = sessionFactory.getCurrentSession().createCriteria(clazz);
+		Criteria c = sessionFactory.getCurrentSession().createCriteria(exampleEntity.getClass());
 		c.add(Example.create(exampleEntity));
 		c.setFirstResult(firstResult);
 		c.setMaxResults(maxResults);

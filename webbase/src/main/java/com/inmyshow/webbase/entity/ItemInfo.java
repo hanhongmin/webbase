@@ -5,6 +5,10 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.inmyshow.webbase.action.utils.CustomJsonDateSerializer;
 @Entity
 @Table(name = "item_info")
 public class ItemInfo extends BaseEntity{
@@ -49,6 +53,18 @@ public class ItemInfo extends BaseEntity{
 	private String oldFolder;
 	/**老配置loadType*/
 	private String loadType;
+	/**是否在售*/
+	private Integer isSell;
+	@Column(name = "is_sell")
+	public Integer getIsSell() {
+		return isSell;
+	}
+
+
+	public void setIsSell(Integer isSell) {
+		this.isSell = isSell;
+	}
+
 
 	@Column(name = "item_name")
 	public String getItemName() {
@@ -117,6 +133,7 @@ public class ItemInfo extends BaseEntity{
 	
 
 	@Column(name = "last_opt_time")
+	@JsonSerialize(using=CustomJsonDateSerializer.class)
 	public Date getLastOptTime() {
 		return lastOptTime;
 	}
@@ -197,6 +214,7 @@ public class ItemInfo extends BaseEntity{
 	}
 
 	@Column(name = "upload_time")
+	@JsonSerialize(using=CustomJsonDateSerializer.class)
 	public Date getUploadTime() {
 		return uploadTime;
 	}
