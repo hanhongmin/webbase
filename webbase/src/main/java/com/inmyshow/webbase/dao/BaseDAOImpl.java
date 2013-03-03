@@ -38,7 +38,6 @@ public class BaseDAOImpl<T extends Object, ID extends Serializable> implements I
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
 	public List<T> findByCriteria(DetachedCriteria dc) {
 		Criteria c = dc.getExecutableCriteria(sessionFactory.getCurrentSession());
 		return c.list();

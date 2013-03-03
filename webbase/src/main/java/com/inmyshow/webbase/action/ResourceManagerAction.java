@@ -21,7 +21,7 @@ public class ResourceManagerAction {
 	@Resource(name="itemInfoDao")
 	private IItemInfoDao itemDao;
 	@RequestMapping("/manager")
-	public @ResponseBody GirdJsonObject managerView( int rows,int page,String sidx,String sord) throws IOException {
+	public @ResponseBody GirdJsonObject managerData( int rows,int page,String sidx,String sord) throws IOException {
 		List<ItemInfo> list =  itemDao.getList(rows*(page-1), rows,sidx,sord);
 		long total = itemDao.countAll();
 		GirdJsonObject json = new GirdJsonObject();
@@ -31,5 +31,16 @@ public class ResourceManagerAction {
 		json.setRecords(String.valueOf(total));
 		json.setTotal(totalPage);
 		return json;
+	}
+	
+	@RequestMapping("/updateresource")
+	public String updateData(ItemInfo info,String oper) throws IOException {
+		if("del".equalsIgnoreCase(oper)){
+			itemDao.delete(info);
+		}else{
+			boolean result = itemDao.updateById(info);
+		}
+		
+		return "testviews/updatesuccess";
 	}
 }

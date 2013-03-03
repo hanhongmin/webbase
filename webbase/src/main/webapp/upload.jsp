@@ -216,7 +216,7 @@
 											rowNum : 10,
 											rowList : [ 10, 20, 30, 50, 100 ],
 											pager : '#prowed2',
-											sortname : 'lastOptTime',
+											sortname : 'uploadTime',
 											viewrecords : true,
 											sortorder : "desc",
 											/**
@@ -256,8 +256,9 @@
 										});
 						$("#rowed2").jqGrid('navGrid', "#prowed2", {
 							edit : false,
-							add : false
-						});
+							add : false,
+							search:false
+						}, {}, {}, {}, {multipleSearch:false, multipleGroup:false, showQuery: true});
 					});
 </script>
 </head>
@@ -273,5 +274,9 @@
 	<table id="rowed2"></table>
 	<div id="prowed2"></div>
 	<br />
+	<input id="bt1" type="button" value="ItemConfig" />
+	<input id="bt2" type="button" value="PackageConfig" />
+	<input id="bt3" type="button" value="商品表" />
+	<input id="bt4" type="button" value="ADO" />
 </body>
 </html>
